@@ -43,31 +43,31 @@ pipeline {
             }
         }
         // Build and Tag Service Docker Image
-        stage('Build & Tag Microservice Docker Image') {
-            steps {
-                script {
-                    withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker build -t awanmbandi/cartservice:latest ./src"
-                    }
-                }
-            }
-        }
-        // Execute SCA/Dependency Test on Service Docker Image
-        stage('Snyk SCA Test | Dependencies') {
-            steps {
-                sh "${SNYK_HOME}/snyk-linux test --docker awanmbandi/cartservice:latest || true" 
-            }
-        }
+        // stage('Build & Tag Microservice Docker Image') {
+        //     steps {
+        //         script {
+        //             withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
+        //                 sh "docker build -t awanmbandi/cartservice:latest ./src"
+        //             }
+        //         }
+        //     }
+        // }
+        // // Execute SCA/Dependency Test on Service Docker Image
+        // stage('Snyk SCA Test | Dependencies') {
+        //     steps {
+        //         sh "${SNYK_HOME}/snyk-linux test --docker awanmbandi/cartservice:latest || true" 
+        //     }
+        // }
         // Push Service Image to DockerHub
-        stage('Push Microservice Docker Image') {
-            steps {
-                script {
-                    withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
-                        sh "docker push awanmbandi/cartservice:latest "
-                    }
-                }
-            }
-        }
+        // stage('Push Microservice Docker Image') {
+        //     steps {
+        //         script {
+        //             withDockerRegistry(credentialsId: 'DockerHub-Credential', toolName: 'docker') {
+        //                 sh "docker push awanmbandi/cartservice:latest "
+        //             }
+        //         }
+        //     }
+        // }
         // // Deploy to The Staging/Test Environment
         // stage('Deploy Microservice To The Stage/Test Env'){
         //     steps{
